@@ -1,11 +1,19 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useQuery } from "urql";
+
+import Product from "../components/Product";
 import { PRODUCT_QUERY } from "../lib/query";
+import { Gallery } from "../styles/Gallery";
+import { P } from "../types";
 
 const Home: NextPage = () => {
   const [{ data, error, fetching }] = useQuery({ query: PRODUCT_QUERY });
-  console.log(data);
+  if (fetching) return <h1>loading...</h1>;
+  if (error) return <h1>Error: {error.message}</h1>;
+
+  const products: P[] = data.products.data.map((p: any) => p.attributes);
+
   return (
     <div>
       <Head>
@@ -16,6 +24,12 @@ const Home: NextPage = () => {
 
       <main>
         <h1>hi next</h1>
+
+        <Gallery>
+          {products.map((product) => (
+            <Product key={product.slug} product={product} />
+          ))}
+        </Gallery>
       </main>
     </div>
   );

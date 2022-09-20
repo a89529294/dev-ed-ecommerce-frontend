@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import { Provider, createClient } from "urql";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = createClient({ url: "http://localhost:1337/graphql" });
+  const client = createClient({ url: process.env.NEXT_PUBLIC_BACKEND_API! });
 
   return (
     <Provider value={client}>
