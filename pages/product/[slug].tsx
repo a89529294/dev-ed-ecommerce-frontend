@@ -1,6 +1,6 @@
 import Image from "next/future/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "urql";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 
@@ -11,6 +11,7 @@ import {
   ProductInfo,
   Quantity,
 } from "../../styles/ProductDetails";
+import { useShopContext } from "../../lib/context";
 
 function ProductDetails() {
   const {
@@ -20,6 +21,8 @@ function ProductDetails() {
     query: GET_PRODUCT_QUERY,
     variables: { slug },
   });
+  const { qty, increment, decrement, reset } = useShopContext()!;
+  useEffect(reset, []);
   if (fetching) return <h1>loading...</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
   if (!data.products.data.length) return <h1>Product does not exist!</h1>;
@@ -52,11 +55,11 @@ function ProductDetails() {
 
         <Quantity>
           <span>Quant</span>
-          <button>
+          <button onClick={decrement}>
             <AiFillMinusCircle />
           </button>
-          <p>0</p>
-          <button>
+          <p>{qty}</p>
+          <button onClick={increment}>
             <AiFillPlusCircle />
           </button>
         </Quantity>

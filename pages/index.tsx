@@ -23,8 +23,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>hi next</h1>
-
         <Gallery>
           {products.map((product) => (
             <Product key={product.slug} product={product} />
