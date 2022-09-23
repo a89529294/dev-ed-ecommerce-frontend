@@ -21,7 +21,7 @@ function ProductDetails() {
     query: GET_PRODUCT_QUERY,
     variables: { slug },
   });
-  const { qty, increment, decrement, reset } = useShopContext()!;
+  const { qty, increment, decrement, reset, onAdd } = useShopContext()!;
   useEffect(reset, []);
   if (fetching) return <h1>loading...</h1>;
   if (error) return <h1>Error: {error.message}</h1>;
@@ -63,7 +63,9 @@ function ProductDetails() {
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <Buy>Add to cart</Buy>
+        <Buy onClick={() => onAdd(data.products.data[0].attributes)}>
+          Add to cart
+        </Buy>
       </ProductInfo>
     </DetailsStyle>
   );

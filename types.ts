@@ -16,3 +16,5 @@ export type P = {
   price: number;
   slug: string;
 };
+
+export type CartItem = P & { qty: number };

@@ -1,8 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { FiShoppingBag } from "react-icons/fi";
+import { CardInfo } from "../styles/CartStyles";
 
 import { NavItems, NavStyles } from "../styles/NavStyles";
+import Cart from "./Cart";
 
 function Nav() {
   return (
@@ -11,11 +13,12 @@ function Nav() {
         <a>Styled.</a>
       </Link>
       <NavItems>
-        <div>
+        <CardInfo>
           <FiShoppingBag />
           <h3>cart</h3>
-        </div>
+        </CardInfo>
       </NavItems>
+      <Cart />
     </NavStyles>
   );
 }
