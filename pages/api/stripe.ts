@@ -24,7 +24,6 @@ export default async function handler(
         allow_promotion_codes: true,
         shipping_options: [{ shipping_rate: "shr_1LlwEuGSMnogWf584yzt5Jj7" }],
         line_items: req.body.map((item: any) => {
-          console.log(item);
           return {
             price_data: {
               currency: "usd",
