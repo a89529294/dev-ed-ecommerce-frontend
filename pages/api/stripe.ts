@@ -1,10 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import Stripe from "stripe";
-const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`, {
-  // @ts-ignore
-  apiVersion: null,
-});
+const stripe = require("stripe")(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -40,10 +37,9 @@ export default async function handler(
             quantity: item.qty,
           };
         }),
-        success_url: `${req.headers.origin}/success`,
+        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/canceled`,
       });
-
       res.status(200).json(session);
     } catch (err: any) {
       res.status(err.statusCode || 500).json(err.message);

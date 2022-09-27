@@ -44,7 +44,6 @@ const handleCheckout = async (cartItems: CartItem[]) => {
   });
   const data = await response.json();
   // TODO add error handling when stripe is null, maybe pop a toast
-  console.log(data);
   if (!stripe) return;
   await stripe.redirectToCheckout({ sessionId: data.id });
 };

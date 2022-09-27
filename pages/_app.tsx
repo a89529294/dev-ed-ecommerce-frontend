@@ -10,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider value={client}>
-      <Head>{/* <script src="http://localhost:8097"></script> */}</Head>
+      <Head>
+        <title>Styled.</title>
+      </Head>
       <StateContext>
         <Nav />
         <Component {...pageProps} />
