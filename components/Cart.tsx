@@ -1,4 +1,3 @@
-import { AnimatePresence } from "framer-motion";
 import Image from "next/future/image";
 import React from "react";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";

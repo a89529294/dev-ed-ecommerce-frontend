@@ -44,6 +44,12 @@ export const CardInfo = styled(motion.div)`
     display: flex;
     justify-content: space-between;
   }
+  margin-left: 3rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export const EmptyStyle = styled(motion.div)`

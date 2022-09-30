@@ -1,4 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { getSession } from "@auth0/nextjs-auth0";
 import type { NextApiRequest, NextApiResponse } from "next";
 const stripe = require("stripe")(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
@@ -6,6 +7,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const session = getSession(req, res);
+  const user = session?.user;
+
   if (req.method === "POST") {
     try {
       // Create Checkout Sessions from body params.
@@ -14,7 +18,7 @@ export default async function handler(
         mode: "payment",
         payment_method_types: ["card"],
         //Add Later
-        // customer: stripeId,
+        customer: user ? user["http://localhost:3000/stripe_customer_id"] : "",
         shipping_address_collection: {
           allowed_countries: ["US", "CA"],
         },
