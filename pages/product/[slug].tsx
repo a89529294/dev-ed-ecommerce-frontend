@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useQuery } from "urql";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 import { GET_PRODUCT_QUERY } from "../../lib/query";
 import {
@@ -40,6 +41,13 @@ function ProductDetails() {
     },
   } = data.products.data[0].attributes;
 
+  const notify = () => {
+    toast.success(`${title} added yo your cart!`, {
+      duration: 1500,
+      icon: "🛒",
+    });
+  };
+
   return (
     <DetailsStyle>
       <Image
@@ -63,7 +71,11 @@ function ProductDetails() {
             <AiFillPlusCircle />
           </button>
         </Quantity>
-        <Buy onClick={() => onAdd(data.products.data[0].attributes)}>
+        <Buy
+          onClick={() => {
+            notify();
+            onAdd(data.products.data[0].attributes);
+          }}>
           Add to cart
         </Buy>
       </ProductInfo>

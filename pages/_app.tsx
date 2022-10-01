@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider, createClient } from "urql";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 
 import Nav from "../components/Nav";
 import { StateContext } from "../lib/context";
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <title>Styled.</title>
         </Head>
         <StateContext>
+          <Toaster />
           <Nav />
           <Component {...pageProps} />
         </StateContext>
